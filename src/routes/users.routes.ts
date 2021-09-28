@@ -15,16 +15,28 @@ usersRoutes.post("/", (request, response) => {
   }
 });
 
-usersRoutes.patch("/:user_id/admin", (request, response) =>
-  turnUserAdminController.handle(request, response)
-);
+usersRoutes.patch("/:user_id/admin", (request, response) => {
+  try {
+    return turnUserAdminController.handle(request, response);
+  } catch (error) {
+    return response.status(404).json({ error });
+  }
+});
 
-usersRoutes.get("/:user_id", (request, response) =>
-  showUserProfileController.handle(request, response)
-);
+usersRoutes.get("/:user_id", (request, response) => {
+  try {
+    return showUserProfileController.handle(request, response);
+  } catch (error) {
+    return response.status(404).json({ error });
+  }
+});
 
-usersRoutes.get("/", (request, response) =>
-  listAllUsersController.handle(request, response)
-);
+usersRoutes.get("/", (request, response) => {
+  try {
+    return listAllUsersController.handle(request, response);
+  } catch (error) {
+    return response.status(400).json({ error });
+  }
+});
 
 export { usersRoutes };
