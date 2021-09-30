@@ -38,12 +38,12 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    const userIndex = this.users.findIndex((u) => u === receivedUser);
+    const user = this.users.find((u) => u === receivedUser);
 
-    this.users[userIndex].admin = true;
-    this.users[userIndex].updated_at = new Date();
+    user.admin = true;
+    user.updated_at = new Date();
 
-    return this.users[userIndex];
+    return user;
   }
 
   list(): User[] {
